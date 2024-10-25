@@ -1,51 +1,41 @@
 package org.example;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Prime {
 
-    public static void menu() {
-        Scanner sc = new Scanner(System.in);
-        int startInterval;
-        int endInterval;
+    public static ArrayList<Integer> identifyPrime(int start, int end) {
+        ArrayList<Integer> primeArray = new ArrayList<>();
 
-        while (true) {
-            System.out.print("Ange startinterval (0 - 1000): ");
-            if (sc.hasNextInt()) {
-                startInterval = sc.nextInt();
-                if (isValidStartInterval(startInterval))
-                    break;
-                else {
-                    System.out.print("Felaktig input! ");
-                }
-            } else {
-                System.out.print("Felaktig input! ");
-                sc.next();
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) {
+                primeArray.add(i);
             }
         }
 
-        while (true) {
-            System.out.print("Ange slutinterval (" + startInterval + " - 1000): ");
-            if (sc.hasNextInt()) {
-                endInterval = sc.nextInt();
-                if (isValidInterval(startInterval, endInterval)) {
-                    break;
-                } else {
-                    System.out.print("Felaktig input! ");
-                }
-            } else {
-                System.out.print("Felaktig input! ");
-                sc.next();
+        return primeArray;
+    }
+
+    public static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) {
+                return false;
             }
         }
+
+        return true;
     }
 
-    public static boolean isValidStartInterval(int start) {
-        // Start interval can maximum be 999 in order for end interval to exist
-        return (start >= 0 && start < 1000);
-    }
+    public static int sumOfNumbers(ArrayList<Integer> primeArray) {
+        int sum = 0;
+        for (int i : primeArray) {
+            sum += i;
+        }
 
-    public static boolean isValidInterval(int start, int end) {
-        return start > 0 && end <= 1000 && start < end;
+        return sum;
     }
 }
