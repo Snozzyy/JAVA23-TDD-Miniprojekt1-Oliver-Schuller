@@ -21,18 +21,21 @@ class MenuTest {
 
     private ByteArrayOutputStream testOut;
 
+    // Used to capture output
     @BeforeEach
     public void setUpOutput() {
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
     }
 
+    // Restore system input and output
     @AfterEach
     public void restoreSystemInputOutput() {
         System.setIn(systemIn);
         System.setOut(systemOut);
     }
 
+    // Used to "simulate" scanner input
     private void provideInput(String data) {
         ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
